@@ -17,11 +17,11 @@ function processSnapshot(snapshot, { debug }) {
     // TODO this requires the callback to understand how the heapsnapshots are structured
     nextEdgeIndex = nextEdgeIndex + ownedEdgeCount * snapshot.edgeFieldsCount;
     totalObjects++;
-    if (!snapshot.isNodeObjectTypeEqual('WeakMap', nodeIndex)) {
+    if (!snapshot.isNodeObjectTypeEqual('WeakRef', nodeIndex) && !snapshot.isNodeObjectTypeEqual('DebugWeakCache', nodeIndex) && !snapshot.isNodeObjectTypeEqual('WeakMap', nodeIndex) && !snapshot.isNodeObjectTypeEqual('DebugWeakMap', nodeIndex)) {
       return;
     }
     if (debug) {
-      console.log(`Found WeakMap at ${nodeIndex}`);
+      console.log(`Found Weak Mapping at ${nodeIndex}`);
     }
 
     weakMaps++;
